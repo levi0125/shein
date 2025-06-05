@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content=" ROPA NUEVA ">
+        <meta name="keywords" content="LA MEJOR CALIDAD Y PRECIOS">
+        <meta name="author" content="SHEIN">
+        <title>TODO TIPO DE ESTILOS - Inicio</title>
+        <link rel="stylesheet" href="estilos.css">
+        <style>
+            /* Estilos adicionales */
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f7f7f7;
+                color: #333;
+            }
+            header {
+                background-color: #ffffff;
+                padding: 20px;
+                text-align: center;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            nav {
+                background-color: #020001;
+                color: #fff;
+                text-align: center;
+                padding: 10px 0;
+            }
+            nav ul {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+            }
+            nav ul li {
+                display: inline;
+                margin-right: 20px;
+            }
+            nav ul li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 18px;
+                transition: color 0.3s ease;
+            }
+            nav ul li a:hover {
+                color: #f4f4f4;
+            }
+            section.main {
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                flex-wrap: wrap;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+            section.articles {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                margin-top: 20px;
+            }
+            article {
+                flex: 1 0 300px;
+                margin-bottom: 20px;
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+            article:hover {
+                transform: translateY(-5px);
+            }
+            article img {
+                width: 100%;
+                height: auto;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            aside {
+                background-color: #ffffff;
+                padding: 20px;
+                margin-top: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                padding: 20px 0;
+            }
+            footer p {
+                margin: 0;
+            }
+        </style>
+    </head>
+</head>
+<body>
+<header>
+   <img src="../static/imgs/I_1.jpg" alt="Logo" width="200px">
+</header>
+
+<nav>
+    <!-- <ul>
+        <li><a href="INICIO.php">INICIO</a></li>
+        <li><a href="MUJER.html"> MUJER</a></li>
+        <li><a href="HOMBRE.html">HOMBRE</a></li>
+        <li><a href="carrito.html"> 🛒 </a></li> <!-- Cambiado a carrito.html -->
+    
+        <li><a href="REGISTRO.php">Registro</a></li>
+    </ul> -->
+</body>
+
+    <section class="main">
+        <h2>Artículos en el carrito</h2>
+        <img id="imagenCarrito" src="../static/imgs/" alt="Imagen en el carrito">
+        <!-- Otros elementos del carrito -->
+    </section>
+    
+
+ 
+<section class="main">
+    <h2>Carrito de Compras</h2>
+    <ul id="listaCarrito">
+        <!-- Los artículos seleccionados se agregarán aquí -->
+    </ul>
+    <button onclick="realizarCompra()">Realizar Compra</button>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        mostrarProductosEnCarrito();
+    });
+
+    function mostrarProductosEnCarrito() {
+        var carrito = localStorage.getItem('carrito');
+        if (carrito) {
+            carrito = JSON.parse(carrito);
+            var listaCarrito = document.getElementById('listaCarrito');
+            listaCarrito.innerHTML = '';
+            carrito.forEach(function(producto) {
+                var item = document.createElement('li');
+                item.textContent = producto.nombre + ' - ' + producto.precio;
+                listaCarrito.appendChild(item);
+            });
+        }
+    }
+
+    function realizarCompra() {
+        // Lógica para realizar la compra
+    }
+</script>
+<head>
+    <!-- Metadatos y enlaces a CSS -->
+</head>
+<body>
+<header>
+   <!-- Contenido del encabezado -->
+</header>
+
+<nav>
+    <!-- Menú de navegación -->
+</nav>
+    
+<section class="main">
+    <section class="articles">
+        <!-- Contenido de los artículos -->
+    </section>
+   
+</section>
+
+<footer>
+    <!-- Pie de página -->
+</footer>
+
+<script>
+    // Función para resaltar el artículo al pasar el mouse sobre él
+    function resaltarArticulo(articulo) {
+        articulo.style.backgroundColor = "#f0f0";
+    }
+
+    // Función para agregar un artículo al carrito
+    function agregarAlCarrito(nombre, talla, precio) {
+        alert("¡Se añadió al carrito!"); 
+        
+        var carrito = localStorage.getItem('carrito');
+        if (!carrito) {
+            carrito = [];
+        } else {
+            carrito = JSON.parse(carrito);
+        }
+        carrito.push({nombre: nombre, talla: talla, precio: precio});
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+        window.location.href = 'carrito.html'; // Redirige a la página del carrito
+    }
+    
+
+
+
+
+    // Función para eliminar un artículo del carrito
+    function eliminarDelCarrito(index) {
+        var carrito = JSON.parse(localStorage.getItem('carrito'));
+        carrito.splice(index, 1); // Elimina el elemento del array
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        mostrarCarrito(); // Vuelve a mostrar el carrito actualizado
+    }
+
+    // Función para mostrar el carrito en la página
+    function mostrarCarrito() {
+        var carrito = JSON.parse(localStorage.getItem('carrito'));
+        var carritoHTML = '';
+        for (var i = 0; i < carrito.length; i++) {
+            carritoHTML += '<div>';
+            carritoHTML += '<p>' + carrito[i].nombre + ' - ' + carrito[i].precio + '</p>';
+            carritoHTML += '<button onclick="eliminarDelCarrito(' + i + ')">Eliminar</button>';
+            carritoHTML += '</div>';
+        }
+        document.getElementById('carrito').innerHTML = carritoHTML;
+    }
+
+    // Llama a la función para mostrar el carrito cuando se cargue la página
+    window.onload = function() {
+        mostrarCarrito();
+    };
+</script>
+
+<!-- Contenedor para mostrar el carrito -->
+<div id="carrito"></div>
+
+</body>
+</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Pago exitoso">
+    <title>Compra</title>
+    <style>
+        /* Estilos adicionales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<button onclick="realizarPago()">Pagar</button>
+
+<script>
+    function realizarPago() {
+        alert("Compra exitosa");
+    }
+</script>
+
+</body>
+</html>
