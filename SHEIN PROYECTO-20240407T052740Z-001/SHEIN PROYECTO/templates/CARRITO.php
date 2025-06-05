@@ -13,6 +13,109 @@
     <link rel="stylesheet" href="../static/styles/basic.css">
 </head>
 <body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #444;
+            color: white;
+            padding: 10px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .main {
+            padding: 20px;
+        }
+        .main h2 {
+            color: #333;
+        }
+        * {
+            box-sizing: border-box;
+            max-width:95vw;
+        }
+        #carrito{
+            width:max(40vw, 600px);
+            div{
+                display:grid;
+                grid-template-columns: 5fr 2fr 2fr;
+            }
+        }
+        .center{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        #carrito {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #carrito div {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        #carrito div p {
+            margin: 0;
+        }
+        #carrito div button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #carrito div button:hover {
+            background-color: #218838;
+        }
+        #carrito div button:last-child {
+            background-color: #007bff;
+        }
+        #carrito div button:last-child:hover {
+            background-color: #0056b3;
+        }
+        #carrito div button:first-child {
+            background-color: #dc3545;
+        }
+        #carrito div button:first-child:hover {
+            background-color: #c82333;
+        }
+        #carrito div:hover {
+            background-color: #f0f0f0;
+        }
+        #carrito div:hover p {
+            color: #333;
+        }
+
+        </style>
     <header>
         <img src="../static/imgs/I_1.jpg" alt="Logo" width="200px">
     </header>
@@ -29,13 +132,22 @@
         <!-- Otros elementos del carrito -->
     </section>
     <section class="main">
-        <h2>Carrito de Compras</h2>
-        <ul id="listaCarrito">
+        <h2>Historial</h2>
+        <ul id="listaCompras">
+            <!-- <div>
+                <p>${producto.nombre} - Talla: ${producto.talla} - Precio: $${producto.precio}</p>
+                <button onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>
+                <button onclick="comprarElemento(${producto.id})">Comprar</button>
+            </div> -->
             <!-- Los artículos seleccionados se agregarán aquí -->
         </ul>
-        <button onclick="realizarCompra()">Comprar todo</button>
+        <!-- <button onclick="realizarCompra()">Comprar todo</button> -->
     </section>
 
+    <!-- Contenedor para mostrar el carrito -->
+    <div class="center">
+        <div id="carrito"></div>
+    </div>
 <script>
     // document.addEventListener('DOMContentLoaded', function() {
     //     mostrarProductosEnCarrito();
@@ -90,54 +202,80 @@
     // window.onload = function() {
     //     mostrarCarrito();
     // };
-
-    document.addEventListener('DOMContentLoaded', function () {
-            // Realizar una solicitud para obtener los datos del carrito
-            fetch('obtener_carrito.php')
+    // interface dataProcessCallback {
+    //     (data: any): void;
+    // }
+    function obtenerCarrito(quieresHistorial=false, callback = (data) => {}) {
+        fetch('obtener_carrito.php?Historial=' + (quieresHistorial ? '1' : '0'))
                 .then(response => {
                     if (!response.ok) {
+                        console.error("RESPONSE NO ESTA OK")
+                        console.log(response)
                         throw new Error("Error al obtener el carrito: " + response.statusText);
                     }
                     return response.json(); // Convertir la respuesta a JSON
                 })
                 .then(data => {
                     console.log("Datos del carrito:", data);
-                    const listaCarrito = document.getElementById('listaCarrito');
-                    const carrito= document.getElementById('carrito');
-    
-                    if (data.status === "success") {
-                        // Renderizar los artículos en el carrito
-                        data.carrito.forEach(producto => {
-                            try {
-                                const li = document.createElement('li');
-                                li.textContent = `${producto.nombre} - Talla: ${producto.talla} - Precio: $${producto.precio}`;
-                                listaCarrito.appendChild(li);
-                                // ========================================================================                                
-                                const div=document.createElement('div')
-                                // console.log("Producto:", producto);
-                                div.innerHTML = `<p>${producto.nombre} - Talla: ${producto.talla} - Precio: $${producto.precio}</p>
-                                                <button onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>
-                                                <button onclick="comprarElemento(${producto.id})">Comprar</button>`;
-                                carrito.appendChild(div);
-                            // ========================================================================
-                            } catch (error) {
-                                console.error("Error al crear el elemento del carrito:", error);
-                            }
-                        });
-                    } else {
-                        // Mostrar mensaje si el carrito está vacío
-                        listaCarrito.innerHTML = `<li>${data.mensaje}</li>`;
-                    }
+                    callback(data); // Llamar al callback con los datos obtenidos
                 })
                 .catch(error => {
                     console.error("Error:", error);
                     alert("Hubo un error al cargar el carrito.");
             });
-        });
-</script>
+    }
 
-<!-- Contenedor para mostrar el carrito -->
-<div id="carrito"></div>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Realizar una solicitud para obtener los datos del carrito
+        obtenerCarrito(false,(data)=>{
+            const carrito= document.getElementById('carrito');
+
+            if (data.status != "success") {
+                // Mostrar mensaje si el carrito está vacío
+                listaCarrito.innerHTML = `<li>${data.mensaje}</li>`;
+                return ;
+            }
+            // Renderizar los artículos en el carrito
+            data.carrito.forEach(producto => {
+                try {
+                    const div=document.createElement('div')
+                    // console.log("Producto:", producto);
+                    div.innerHTML = `<p>${producto.nombre} - Talla: ${producto.talla} - Precio: $${producto.precio}</p>
+                                    <button onclick="eliminarDelCarrito(${producto.id})">Eliminar</button>
+                                    <button onclick="comprarElemento(${producto.id})">Comprar</button>`;
+                    carrito.appendChild(div);
+                // ========================================================================
+                } catch (error) {
+                    console.error("Error al crear el elemento del carrito:", error);
+                }
+            });   
+        });
+        obtenerCarrito(true,(data)=>{
+            const historial = document.getElementById('listaCompras');
+            const carrito= document.getElementById('carrito');
+
+            if (data.status != "success") {
+                // Mostrar mensaje si el carrito está vacío
+                historial.innerHTML = `<li>${data.mensaje}</li>`;
+                return ;
+            }
+            // Renderizar los artículos en el carrito
+            data.carrito.forEach(producto => {
+                try {
+                    const li = document.createElement('li');
+                    li.textContent = `${producto.nombre} - Talla: ${producto.talla} - Precio: $${producto.precio}`;
+                    historial.appendChild(li);
+                    
+                    // ========================================================================
+                } catch (error) {
+                    console.error("Error al crear el elemento del carrito:", error);
+                }
+            });
+            
+            // Aquí puedes procesar los datos del carrito si es necesario    
+        });	
+    });	
+</script>
 
 </body>
 </html>
