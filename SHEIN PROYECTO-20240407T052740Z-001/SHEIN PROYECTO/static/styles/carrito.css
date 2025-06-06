@@ -1,0 +1,127 @@
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+nav {
+    background-color: #444;
+    color: white;
+    padding: 10px;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+} */
+.main {
+    padding: 20px;
+}
+.main h2 {
+    color: #333;
+}
+* {
+    box-sizing: border-box;
+    max-width:95vw;
+}
+
+#carrito,#historial{
+    text-align: center;
+    width:max(40vw, 600px);
+}
+#carrito div{
+    display:grid;
+    grid-template-columns: 5fr 2fr 2fr;
+}
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+#carrito {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+#carrito div {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+#carrito div p {
+    margin: 0;
+}
+#carrito div button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#carrito div button:hover {
+    background-color: #218838;
+}
+#carrito div button:last-child {
+    background-color: #007bff;
+}
+#carrito div button:last-child:hover {
+    background-color: #0056b3;
+}
+#carrito div button:first-child {
+    background-color: #dc3545;
+}
+#carrito div button:first-child:hover {
+    background-color: #c82333;
+}
+#carrito div:hover {
+    background-color: #f0f0f0;
+}
+#carrito div:hover p {
+    color: #333;
+}
+.content{
+    display:grid;
+    grid-template-columns: 7fr 1fr;
+}
+
+
+#historial{
+    background: #fa9fd1;
+    .content{
+        /* background: #f8cce0; */
+        background: #ffeaf6;
+    }
+    #total{
+        padding-top: 10px;
+        font-weight: bold;
+        font-size: 1.2em;
+        /* color: #d1006b; */
+        background: #f8cce0;
+        /* background:#ffeaf6; */
+        /* background: #eac8ff; */
+        /* font-weight: bold;
+        font-size: 1.2em;
+        color: #d1006b; */
+    }
+}
