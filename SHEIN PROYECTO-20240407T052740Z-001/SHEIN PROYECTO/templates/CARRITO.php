@@ -14,7 +14,7 @@
 </head>
 <body>
     <style>
-        body {
+        /* body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
@@ -42,7 +42,7 @@
         nav ul li a {
             color: white;
             text-decoration: none;
-        }
+        } */
         .main {
             padding: 20px;
         }
@@ -55,6 +55,7 @@
         }
 
         #carrito,#historial{
+            text-align: center;
             width:max(40vw, 600px);
         }
         #carrito div{
@@ -119,6 +120,27 @@
             display:grid;
             grid-template-columns: 7fr 1fr;
         }
+
+
+        #historial{
+            background: #fa9fd1;
+            .content{
+                /* background: #f8cce0; */
+                background: #ffeaf6;
+            }
+            #total{
+                padding-top: 10px;
+                font-weight: bold;
+                font-size: 1.2em;
+                /* color: #d1006b; */
+                background: #f8cce0;
+                /* background:#ffeaf6; */
+                /* background: #eac8ff; */
+                /* font-weight: bold;
+                font-size: 1.2em;
+                color: #d1006b; */
+            }
+        }
         </style>
     <header>
         <img src="../static/imgs/I_1.jpg" alt="Logo" width="200px">
@@ -130,24 +152,23 @@
         ?>
     </nav>
 
-    <section class="main">
+    <!-- <section class="main">
         <h2>Artículos en el carrito</h2>
         <img id="imagenCarrito" src="" alt="Imagen en el carrito">
-        <!-- Otros elementos del carrito -->
-    </section>
+    </section> -->
     
     <!-- Contenedor para mostrar el carrito -->
     <div class="center">
         <section id="historial">
             <h2>Historial</h2>
-            <div class="content">
-                <ul id="listaCompras"></ul>
-                <div id="total">TOTAL:</div>
+            <div class="content" bis_skin_checked="1">
+                <ul id="listaCompras"><li id="historialItem1" class="historialItem">FALDA CARGO CORTA - Talla: S - Precio: $500</li><li id="historialItem2" class="historialItem">PLAYERA LISA - Talla: S - Precio: $200</li><li id="historialItem3" class="historialItem"> CONJUNTO NEGRO - Talla: S - Precio: $200</li><li id="historialItem4" class="historialItem"> CONJUNTO NEGRO - Talla: S - Precio: $200</li><li id="historialItem5" class="historialItem"> OVERSIDE BLANCA - Talla: S - Precio: $300</li><li id="historialItem7" class="historialItem">PLAYERA HOMBRE - Talla: S - Precio: $250</li><li id="historialItem9" class="historialItem">CONJUNTO ROSA - Talla: S - Precio: $300</li></ul>
+                <div id="total" bis_skin_checked="1">TOTAL: $1950.00</div>
             </div>
             <!-- <button onclick="realizarCompra()">Comprar todo</button> -->
         </section>
+
         <h2>Carrito de Compras</h2>
-        <p>Haz clic en un artículo para resaltarlo.</p>
         <div id="carrito"></div>
     </div>
     
