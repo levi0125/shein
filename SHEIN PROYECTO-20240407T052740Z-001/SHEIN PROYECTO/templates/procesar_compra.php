@@ -45,7 +45,8 @@
     // Aquí podrías insertar la compra en la base de datos
     // Por ejemplo:
     include('conexion.php');
-    $query = "INSERT INTO compras (nombre, talla, precio,id_comprador) VALUES (?, ?, ?, ?)";
+    $query = "INSERT INTO compras (nombre, talla, precio,id_comprador,fecha,hora) VALUES (?, ?, ?, ?,date(now()),time(now()) )";
+    // Preparamos la consulta
     $stmt = $conexion->prepare($query);
     $stmt->bind_param("ssdi", $nombre, $talla, $precio, $client_id);
     // Ejecutamos la consulta

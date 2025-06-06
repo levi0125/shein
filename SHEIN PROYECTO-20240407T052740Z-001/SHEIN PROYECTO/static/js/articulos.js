@@ -50,7 +50,7 @@ function agregarAlCarrito(nombre,talla, precio) {
         if(data.status==="success"){
             // Aquí puedes manejar la respuesta del servidor si es necesario
             // Por ejemplo, actualizar el carrito en la interfaz de usuario
-            alert("Compra procesada con éxito.");
+            alert("Se añadio el producto al carrito!");
         }else{
             alert("Error al procesar la compra: " + data.mensaje);
         }

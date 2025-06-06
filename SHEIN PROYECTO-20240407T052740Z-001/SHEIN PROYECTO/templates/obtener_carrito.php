@@ -43,7 +43,9 @@
                 'nombre' => $fila['nombre'],
                 'talla' => $fila['talla'],
                 'precio' => $fila['precio'],
-                'concretado' => $fila['concretado'] ? true : false
+                'concretado' => $fila['concretado'] ? true : false,
+                'fecha' => $fila['fecha'],
+                'hora' => $fila['hora']
             ];
         }
     } else {
